@@ -1,0 +1,13 @@
+# client wireguard config - dns failover method
+# jinja2 template for ansible playbooks
+
+[Interface]
+PrivateKey = {{ client_private_key }}
+Address = {{ client_address }}
+DNS = {{ pihole_ip }}
+
+[Peer]
+PublicKey = {{ server_public_key }}
+AllowedIPs = 0.0.0.0/0
+Endpoint = {{ wireguard_domain }}:51820
+PersistentKeepalive = 25

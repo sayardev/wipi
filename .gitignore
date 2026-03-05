@@ -1,0 +1,10 @@
+*.log
+*.env
+*.tmp
+*.bak
+*.swp
+temp/
+tmp/
+old/
+logs/
+log/
