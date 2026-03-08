@@ -1,0 +1,19 @@
+networks:
+  wipi:
+    driver: bridge
+
+volumes:
+  wipi-cache:
+
+services:
+  wipi-build:
+    build:
+      context: .
+      dockerfile: build/Dockerfile
+    container_name: wipi-build
+    networks:
+      - wipi
+    env_file: build/build.env
+    volumes:
+      - .:/wipi
+      - .cache:/tmp/wipi-cache

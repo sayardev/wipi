@@ -1,0 +1,33 @@
+# version control and user settings
+.git
+.gitignore
+.vscode
+.idea
+
+# build outputs
+bin/
+obj/
+out/
+TestResults/
+coverage/
+.build/
+.cache/
+dist/
+.dist/
+
+# local env
+*.user
+*.suo
+*.db
+*.env
+*.env.*
+
+# markdown/docs
+*.md
+docs/
+
+# container setup files
+Dockerfile
+docker-compose*
+.dockerignore
+.devcontainer/

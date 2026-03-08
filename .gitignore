@@ -8,3 +8,8 @@ tmp/
 old/
 logs/
 log/
+.cache/
+cache
+.build/
+
+
