@@ -1,0 +1,15 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: build
+    env_file: .env
+    volumes:
+      - .:/wipi
+      - .cache:/tmp/wipi-cache
+    working_dir: /wipi
+
+volumes:
+  wipi-cache:
+    driver: local

@@ -1,6 +1,5 @@
 #!/bin/sh
 # cf-ddns - update cloudflare a-record with current public ip
-# uses: /etc/wipi/ddns.conf or env vars
 
 [ -f /etc/wipi/ddns.conf ] && . /etc/wipi/ddns.conf
 

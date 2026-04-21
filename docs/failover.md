@@ -2,6 +2,47 @@
 
 two methods for multi-server failover.
 
+## architecture
+
+```mermaid
+graph TB
+    subgraph dns["dns layer (cf-dom.com)"]
+        rr["round-robin or failover<br/>wipi-a.cf-dom.com<br/>wipi-b.cf-dom.com"]
+    end
+    
+    subgraph client["client device"]
+        wg_client["wireguard client<br/>method: dns-failover or dual-endpoint"]
+    end
+    
+    subgraph servers["wireguard servers + pihole"]
+        server_a["server-a<br/>alpine + wg + pihole<br/>wipi-a.cf-dom.com<br/>20X.X.X.10"]
+        server_b["server-b<br/>alpine + wg + pihole<br/>wipi-b.cf-dom.com<br/>20X.X.X.20"]
+    end
+    
+    subgraph tunnel["wireguard tunnel<br/>10.0.100.0/24"]
+        client_ip["client: 10.0.100.2"]
+        server_ip["servers: 10.0.100.1"]
+    end
+    
+    dns -.->|dns query| rr
+    wg_client -->|method 1-4| rr
+    rr -->|resolved ip| server_a
+    rr -->|resolved ip| server_b
+    server_a <--> tunnel
+    server_b <--> tunnel
+    client_ip <--> server_ip
+    
+    classDef dns fill:#e1f5ff,stroke:#01579b
+    classDef client fill:#f3e5f5,stroke:#4a148c
+    classDef server fill:#e8f5e9,stroke:#1b5e20
+    classDef tunnel fill:#fff3e0,stroke:#e65100
+    
+    class dns dns
+    class wg_client client
+    class server_a,server_b server
+    class tunnel tunnel
+```
+
 ---
 
 ## method 1: dns failover
